@@ -262,7 +262,26 @@ class Bill_model extends CI_Model {
             return array('count' => '', 'state' => $sql_bev);
         }
     }
-    public function bill_by_date_filer($data){
-
+  
+    public function getlistTodayincome(){
+        $sql = "SELECT SUM(sub_total) as total , type FROM tbl_cart where added_at BETWEEN '".date('Y-m-d 00:00:00')."'  AND '".date('Y-m-d 23:59:59')."'  GROUP BY type";
+        $query = $this->db->query($sql);
+        return $query->result();
+        
+    }
+    public function getlistLastdateIncome(){
+         $sql = "SELECT SUM(sub_total) as total , type FROM tbl_cart where added_at BETWEEN '".date('Y-m-d 00:00:00',strtotime("-1 days"))."'  AND '".date('Y-m-d 23:59:59',strtotime("-1 days"))."'  GROUP BY type";
+        $query = $this->db->query($sql);
+        return $query->result();
+    }
+     public function getlistLastweekIncome(){
+         $sql = "SELECT SUM(sub_total) as total , type FROM tbl_cart where added_at BETWEEN '".date('Y-m-d 00:00:00',strtotime("-7 days"))."'  AND '".date('Y-m-d 23:59:59s',strtotime("-1 days"))."'  GROUP BY type";
+        $query = $this->db->query($sql);
+        return $query->result();
+    }
+     public function getlistLastmonthIncome(){
+         $sql = "SELECT SUM(sub_total) as total , type FROM tbl_cart where added_at BETWEEN '".date('Y-m-d 00:00:00',strtotime("first day of previous month"))."'  AND '".date('Y-m-d 23:59:59',strtotime("last day of previous month"))."'  GROUP BY type";
+        $query = $this->db->query($sql);
+        return $query->result();
     }
 }

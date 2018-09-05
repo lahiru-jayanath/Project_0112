@@ -35,9 +35,26 @@
                                         <div class="details">
                                             <div class="number">
                                                 Rs.
-                                                <span data-counter="counterup" data-value="1349">0</span>
+                                                <span data-counter="counterup" data-value="1349">
+                                                <?php 
+                                                  if($today_income)
+                                                  {
+                                                      $sum = 0;
+                                                      foreach($today_income as $income){
+
+                                                         $sum = $income->total + $sum; 
+                                                      }
+                                                      echo $sum;
+                                                  }
+                                                  else {
+                                                      echo 0;
+                                                  }
+                                                ?>    
+                                                    
+                                                </span>
                                             </div>
                                             <div class="desc"> TODAY TOTAL INCOME </div>
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -49,7 +66,23 @@
                                         <div class="details">
                                             <div class="number">
                                                 Rs.
-                                                <span data-counter="counterup" data-value="1349">0</span>
+                                                <span data-counter="counterup" data-value="1349">
+                                                      <?php 
+                                                  if($today_income)
+                                                  {
+                                                      $sum = 0;
+                                                      foreach($today_income as $income){
+                                                            if($income->type =='F'){
+                                                         $sum = $income->total + $sum; 
+                                                            }
+                                                      }
+                                                      echo $sum;
+                                                  }
+                                                  else {
+                                                      echo 0;
+                                                  }
+                                                ?>    
+                                                </span>
                                             </div>
                                             <div class="desc"> TODAY FOOD INCOME </div>
                                         </div>
@@ -63,7 +96,24 @@
                                         <div class="details">
                                             <div class="number">
                                                 Rs.
-                                                <span data-counter="counterup" data-value="1349">0</span>
+                                                <span data-counter="counterup" data-value="1349">
+                                                       <?php 
+                                                  if($today_income)
+                                                  {
+                                                      $sum = 0;
+                                                      foreach($today_income as $income){
+                                                            if($income->type =='B'){
+                                                         $sum = $income->total + $sum; 
+                                                            }
+                                                      }
+                                                      echo $sum;
+                                                  }
+                                                  else {
+                                                      echo 0;
+                                                  }
+                                                ?>  
+                                                    
+                                                </span>
                                             </div>
                                             <div class="desc"> TODAY BEVERAGES INCOME </div>
                                         </div>
@@ -77,7 +127,24 @@
                                         <div class="details">
                                             <div class="number">
                                                  Rs.
-                                                <span data-counter="counterup" data-value="1349">0</span>
+                                                 <span data-counter="counterup" data-value="1349">
+                                                          <?php 
+                                                  if($today_income)
+                                                  {
+                                                      $sum = 0;
+                                                      foreach($today_income as $income){
+                                                            if($income->type =='D'){
+                                                         $sum = $income->total + $sum; 
+                                                            }
+                                                      }
+                                                      echo $sum;
+                                                  }
+                                                  else {
+                                                      echo 0;
+                                                  }
+                                                ?>
+                                                     
+                                                 </span>
                                             </div>
                                             <div class="desc"> TODAY BAR INCOME </div>
                                         </div>
@@ -119,7 +186,23 @@
                                                                             <i class="widget-thumb-icon bg-green icon-bar-chart"></i>
                                                                             <div class="widget-thumb-body">
                                                                                 <span class="widget-thumb-subtitle">RS</span>
-                                                                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="7,644">0</span>
+                                                                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="7,644">
+                                                                                     <?php 
+                                                  if($lastday_income)
+                                                  {
+                                                      $sum = 0;
+                                                      foreach($lastday_income as $income){
+
+                                                         $sum = $income->total + $sum; 
+                                                      }
+                                                      echo $sum;
+                                                  }
+                                                  else {
+                                                      echo 0;
+                                                  }
+                                                ?>    
+                                               
+                                                                                </span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -133,7 +216,25 @@
                                                                             <i class="widget-thumb-icon bg-red icon-bar-chart"></i>
                                                                             <div class="widget-thumb-body">
                                                                                 <span class="widget-thumb-subtitle">RS</span>
-                                                                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="1,293">0</span>
+                                                                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="1,293">
+                                                                                          <?php 
+                                                  if($lastday_income)
+                                                  {
+                                                      $sum = 0;
+                                                      foreach($lastday_income as $income){
+                                                            if($income->type =='F'){
+                                                         $sum = $income->total + $sum; 
+                                                            }
+                                                      }
+                                                      echo $sum;
+                                                  }
+                                                  else {
+                                                      echo 0;
+                                                  }
+                                                ?>
+                                                                                    
+                                                                                    
+                                                                                </span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -147,7 +248,24 @@
                                                                             <i class="widget-thumb-icon bg-purple icon-bar-chart"></i>
                                                                             <div class="widget-thumb-body">
                                                                                 <span class="widget-thumb-subtitle">RS</span>
-                                                                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="815">0</span>
+                                                                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="815">
+                                                                                 <?php 
+                                                  if($lastday_income)
+                                                  {
+                                                      $sum = 0;
+                                                      foreach($lastday_income as $income){
+                                                            if($income->type =='B'){
+                                                         $sum = $income->total + $sum; 
+                                                            }
+                                                      }
+                                                      echo $sum;
+                                                  }
+                                                  else {
+                                                      echo 0;
+                                                  }
+                                                ?>    
+                                                                                
+                                                                                </span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -161,7 +279,23 @@
                                                                             <i class="widget-thumb-icon bg-blue icon-bar-chart"></i>
                                                                             <div class="widget-thumb-body">
                                                                                 <span class="widget-thumb-subtitle">RS</span>
-                                                                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="5,071">0</span>
+                                                                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="5,071">
+                                                                                     <?php 
+                                                  if($lastday_income)
+                                                  {
+                                                      $sum = 0;
+                                                      foreach($lastday_income as $income){
+                                                            if($income->type =='D'){
+                                                         $sum = $income->total + $sum; 
+                                                            }
+                                                      }
+                                                      echo $sum;
+                                                  }
+                                                  else {
+                                                      echo 0;
+                                                  }
+                                                ?>
+                                                                                </span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -188,7 +322,23 @@
                                                                             <i class="widget-thumb-icon bg-green icon-bar-chart"></i>
                                                                             <div class="widget-thumb-body">
                                                                                 <span class="widget-thumb-subtitle">RS</span>
-                                                                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="7,644">0</span>
+                                                                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="7,644">
+                                                                                             <span class="widget-thumb-body-stat" data-counter="counterup" data-value="7,644">
+                                                                                     <?php 
+                                                  if($lastweek_income)
+                                                  {
+                                                      $sum = 0;
+                                                      foreach($lastweek_income as $income){
+
+                                                         $sum = $income->total + $sum; 
+                                                      }
+                                                      echo $sum;
+                                                  }
+                                                  else {
+                                                      echo 0;
+                                                  }
+                                                ?>    
+                                                                                </span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -202,7 +352,23 @@
                                                                             <i class="widget-thumb-icon bg-red icon-bar-chart"></i>
                                                                             <div class="widget-thumb-body">
                                                                                 <span class="widget-thumb-subtitle">RS</span>
-                                                                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="1,293">0</span>
+                                                                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="1,293">
+                                                                                    <?php 
+                                                  if($lastweek_income)
+                                                  {
+                                                      $sum = 0;
+                                                      foreach($lastweek_income as $income){
+                                                            if($income->type =='F'){
+                                                         $sum = $income->total + $sum; 
+                                                            }
+                                                      }
+                                                      echo $sum;
+                                                  }
+                                                  else {
+                                                      echo 0;
+                                                  }
+                                                ?>
+                                                                                </span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -216,7 +382,23 @@
                                                                             <i class="widget-thumb-icon bg-purple icon-bar-chart"></i>
                                                                             <div class="widget-thumb-body">
                                                                                 <span class="widget-thumb-subtitle">RS</span>
-                                                                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="815">0</span>
+                                                                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="815">
+                                                                                      <?php 
+                                                  if($lastweek_income)
+                                                  {
+                                                      $sum = 0;
+                                                      foreach($lastweek_income as $income){
+                                                            if($income->type =='B'){
+                                                         $sum = $income->total + $sum; 
+                                                            }
+                                                      }
+                                                      echo $sum;
+                                                  }
+                                                  else {
+                                                      echo 0;
+                                                  }
+                                                ?>
+                                                                                </span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -230,7 +412,23 @@
                                                                             <i class="widget-thumb-icon bg-blue icon-bar-chart"></i>
                                                                             <div class="widget-thumb-body">
                                                                                 <span class="widget-thumb-subtitle">RS</span>
-                                                                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="5,071">0</span>
+                                                                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="5,071">
+                                                                                      <?php 
+                                                  if($lastweek_income)
+                                                  {
+                                                      $sum = 0;
+                                                      foreach($lastweek_income as $income){
+                                                            if($income->type =='D'){
+                                                         $sum = $income->total + $sum; 
+                                                            }
+                                                      }
+                                                      echo $sum;
+                                                  }
+                                                  else {
+                                                      echo 0;
+                                                  }
+                                                ?>
+                                                                                </span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -257,7 +455,22 @@
                                                                             <i class="widget-thumb-icon bg-green icon-bar-chart"></i>
                                                                             <div class="widget-thumb-body">
                                                                                 <span class="widget-thumb-subtitle">RS</span>
-                                                                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="7,644">0</span>
+                                                                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="7,644">
+                                                                                        <?php 
+                                                  if($lastmonth_income)
+                                                  {
+                                                      $sum = 0;
+                                                      foreach($lastmonth_income as $income){
+
+                                                         $sum = $income->total + $sum; 
+                                                      }
+                                                      echo $sum;
+                                                  }
+                                                  else {
+                                                      echo 0;
+                                                  }
+                                                ?>    
+                                                                                </span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -271,7 +484,23 @@
                                                                             <i class="widget-thumb-icon bg-red icon-bar-chart"></i>
                                                                             <div class="widget-thumb-body">
                                                                                 <span class="widget-thumb-subtitle">RS</span>
-                                                                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="1,293">0</span>
+                                                                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="1,293">
+                                                                                      <?php 
+                                                  if($lastmonth_income)
+                                                  {
+                                                      $sum = 0;
+                                                      foreach($lastmonth_income as $income){
+                                                            if($income->type =='F'){
+                                                         $sum = $income->total + $sum; 
+                                                            }
+                                                      }
+                                                      echo $sum;
+                                                  }
+                                                  else {
+                                                      echo 0;
+                                                  }
+                                                ?>
+                                                                                </span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -285,7 +514,23 @@
                                                                             <i class="widget-thumb-icon bg-purple icon-bar-chart"></i>
                                                                             <div class="widget-thumb-body">
                                                                                 <span class="widget-thumb-subtitle">RS</span>
-                                                                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="815">0</span>
+                                                                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="815">
+                                                                                      <?php 
+                                                  if($lastmonth_income)
+                                                  {
+                                                      $sum = 0;
+                                                      foreach($lastmonth_income as $income){
+                                                            if($income->type =='B'){
+                                                         $sum = $income->total + $sum; 
+                                                            }
+                                                      }
+                                                      echo $sum;
+                                                  }
+                                                  else {
+                                                      echo 0;
+                                                  }
+                                                ?>
+                                                                                </span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -299,7 +544,23 @@
                                                                             <i class="widget-thumb-icon bg-blue icon-bar-chart"></i>
                                                                             <div class="widget-thumb-body">
                                                                                 <span class="widget-thumb-subtitle">RS</span>
-                                                                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="5,071">0</span>
+                                                                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="5,071">
+                                                                                      <?php 
+                                                  if($lastmonth_income)
+                                                  {
+                                                      $sum = 0;
+                                                      foreach($lastmonth_income as $income){
+                                                            if($income->type =='D'){
+                                                         $sum = $income->total + $sum; 
+                                                            }
+                                                      }
+                                                      echo $sum;
+                                                  }
+                                                  else {
+                                                      echo 0;
+                                                  }
+                                                ?>
+                                                                                </span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
