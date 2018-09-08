@@ -30,13 +30,15 @@ class BillingHistory extends CI_Controller {
     public function load_from_date(){
         $date_start = $this->input->get("date_start");
         $date_end = $this->input->get("end_date");
-        //var_dump($date_start);die;
+        $cu_date = $date_end->fromatdate("Y-m-d 00:00:00",$date_start); var_dump($cu_date);die;
         $data = array(
-            "date_start" => $date_start,
-            "date_end"  => $date_end
+            "start_date" => $date_start,
+            "end_date" =>$date_end
         );
 
-        $result = $this->Bill_model->bill_by_date_filer($data);
+        $load_by_date = $this->Bill_model->load_by_date($date_start,$date_end);
+
+
     }
 }
 

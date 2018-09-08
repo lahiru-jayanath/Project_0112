@@ -192,17 +192,16 @@ class Bill_model extends CI_Model {
 
     public function get_bill_history_detail(){
 
-        $cu_date = date("Y-m-d 00:00:00");//var_dump($cu_date);die;
+        $cu_date = date("Y-m-d 00:00:00");
 
         $sql_bill_history = $this->db->query("SELECT crt.session_id,usr.user_fname as bill_owner,usrw.user_fname as waiter,mtbl.tbl_name,sum(crt.sub_total) as total
                                                 FROM tbl_cart crt
                                                 left join tbl_user usr on usr.user_id = crt.user_id
                                                 left join tbl_user usrw on usrw.user_id = crt.waiter_id
                                                 left join tbl_m_tables mtbl on mtbl.iid=crt.tbl_id
-                                                WHERE added_at < '$cu_date'
-                                                group by crt.session_id,usr.user_fname,usrw.user_fname,mtbl.tbl_name,crt.sub_total");
+                                                WHERE added_at > '$cu_date'
+                                                group by crt.session_id,usr.user_fname,usrw.user_fname");
         return $sql_bill_history->result();
-        //$asd = $sql_bill_history->result(); var_dump($asd);die;
     }
 
     public function show_bill_by_id($b_id) {
@@ -219,6 +218,20 @@ class Bill_model extends CI_Model {
                                                     WHERE crt.session_id=$b_id");
 
         return $sql_show_bill->result();
+    }
+
+    public function load_by_date($date_start,$date_end){
+
+        $sql_bill_by_date = $this->db->query("SELECT crt.session_id,usr.user_fname as bill_owner,usrw.user_fname as waiter,mtbl.tbl_name,sum(crt.sub_total) as total
+                                                FROM tbl_cart crt
+                                                left join tbl_user usr on usr.user_id = crt.user_id
+                                                left join tbl_user usrw on usrw.user_id = crt.waiter_id
+                                                left join tbl_m_tables mtbl on mtbl.iid=crt.tbl_id
+                                                WHERE added_at BETWEEN $date_start AND $date_end
+                                                group by crt.session_id,usr.user_fname,usrw.user_fname");
+       // return $sql_bill_history->result();
+        $asd = $sql_bill_history->result(); var_dump($asd);die;
+
     }
 
     public function update_cart_item($cartid, $qty, $sub_total, $table_id, $waiter_id) {
@@ -262,26 +275,34 @@ class Bill_model extends CI_Model {
             return array('count' => '', 'state' => $sql_bev);
         }
     }
-  
+
+
+
+    // ******************************************* Dashboard ***************************************************************
+
     public function getlistTodayincome(){
         $sql = "SELECT SUM(sub_total) as total , type FROM tbl_cart where added_at BETWEEN '".date('Y-m-d 00:00:00')."'  AND '".date('Y-m-d 23:59:59')."'  GROUP BY type";
         $query = $this->db->query($sql);
         return $query->result();
-        
+
     }
     public function getlistLastdateIncome(){
-         $sql = "SELECT SUM(sub_total) as total , type FROM tbl_cart where added_at BETWEEN '".date('Y-m-d 00:00:00',strtotime("-1 days"))."'  AND '".date('Y-m-d 23:59:59',strtotime("-1 days"))."'  GROUP BY type";
+        $sql = "SELECT SUM(sub_total) as total , type FROM tbl_cart where added_at BETWEEN '".date('Y-m-d 00:00:00',strtotime("-1 days"))."'  AND '".date('Y-m-d 23:59:59',strtotime("-1 days"))."'  GROUP BY type";
         $query = $this->db->query($sql);
         return $query->result();
     }
-     public function getlistLastweekIncome(){
-         $sql = "SELECT SUM(sub_total) as total , type FROM tbl_cart where added_at BETWEEN '".date('Y-m-d 00:00:00',strtotime("-7 days"))."'  AND '".date('Y-m-d 23:59:59s',strtotime("-1 days"))."'  GROUP BY type";
+    public function getlistLastweekIncome(){
+        $sql = "SELECT SUM(sub_total) as total , type FROM tbl_cart where added_at BETWEEN '".date('Y-m-d 00:00:00',strtotime("-7 days"))."'  AND '".date('Y-m-d 23:59:59s',strtotime("-1 days"))."'  GROUP BY type";
         $query = $this->db->query($sql);
         return $query->result();
     }
-     public function getlistLastmonthIncome(){
-         $sql = "SELECT SUM(sub_total) as total , type FROM tbl_cart where added_at BETWEEN '".date('Y-m-d 00:00:00',strtotime("first day of previous month"))."'  AND '".date('Y-m-d 23:59:59',strtotime("last day of previous month"))."'  GROUP BY type";
+    public function getlistLastmonthIncome(){
+        $sql = "SELECT SUM(sub_total) as total , type FROM tbl_cart where added_at BETWEEN '".date('Y-m-d 00:00:00',strtotime("first day of previous month"))."'  AND '".date('Y-m-d 23:59:59',strtotime("last day of previous month"))."'  GROUP BY type";
         $query = $this->db->query($sql);
         return $query->result();
     }
+
 }
+
+// main class
+?>

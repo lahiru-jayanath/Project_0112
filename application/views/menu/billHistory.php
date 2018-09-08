@@ -113,7 +113,7 @@
                                                 </thead>
                                                 <tbody>
                                                 <?php
-
+                                               // var_dump($bill_history);die;
                                                 $n = 1;
                                                 if (sizeof($bill_history) > 0) {
 
@@ -236,11 +236,11 @@
 <script type="text/javascript">
     $(document).ready(function (){
 
-      $("#filter").click(function(e){
-          e.preventDefault();
+        $("#filter").click(function(e){
+            e.preventDefault();
             var st_date = $("#date_start").val();
             var ed_date = $("#date_end").val(); //alert(st_date);
-;
+            ;
 
             if(st_date != "" && ed_date != ""){ //alert("asdsad");
 
@@ -249,7 +249,6 @@
                 })
 
             }
-         });
+        });
     });
 </script>
-
