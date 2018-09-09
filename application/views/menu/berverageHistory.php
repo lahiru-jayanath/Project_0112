@@ -17,7 +17,7 @@
                     <div class="container">
                         <!-- BEGIN PAGE TITLE -->
                         <div class="page-title">
-                            <h1>Bill History</h1>
+                            <h1>Beverage History</h1>
                         </div>
                         <!-- END PAGE TITLE -->
                     </div>
@@ -47,7 +47,7 @@
                                         <div class="m-grid-row">
                                             <div class="m-grid-col m-grid-col-top m-grid-col-left m-grid-col-md-3" style="padding: 0px 10px;">
                                                 <div class="form-group">
-                                                    <label for="single" class="control-label">To Date</label>
+                                                    <label for="single" class="control-label">From Date</label>
                                                     <div class="input-group date" data-provide="datepicker">
                                                         <input type="text" class="form-control" name="date_start" id="date_start">
                                                         <div class="input-group-addon">
@@ -58,7 +58,7 @@
                                             </div>
                                             <div class="m-grid-col m-grid-col-top m-grid-col-left m-grid-col-md-3" style="padding: 0px 10px;">
                                                 <div class="form-group">
-                                                    <label for="single" class="control-label">From Date</label>
+                                                    <label for="single" class="control-label">To Date</label>
                                                     <div class="input-group date" data-provide="datepicker">
                                                         <input type="text" class="form-control" name="date_end" id="date_end">
                                                         <div class="input-group-addon">
@@ -67,7 +67,19 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+                                            <div class="m-grid-col m-grid-col-top m-grid-col-left m-grid-col-md-3" style="padding: 0px 10px;">
+                                                <div class="form-group">
+                                                    <label for="single" class="control-label">Type</label>
+                                                    <div class="input-group col-md-10" >
+                                                        <select id="item" class="form-control"> 
+                                                            <option value='0'>All</option>
+                                                            <option value='32' >Coca Cola  </option>
+                                                            <option value="33">Sprite </option>
+                                                            <option value="31">Water Bottle </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="m-grid-col m-grid-col-top m-grid-col-left m-grid-col-md-1" style="padding: 7px 20px;">
                                                 <br/><input type="hidden" name="accsrch1" id="formkeySub" value="Y">
                                                 <button style="width: 150px;" type="submit" name="filter" id="filter" class="btn yellow">Filter <iclass="icon-magnifier"></i></button>  <!--<input type="button" name="filter" id="filter" value="Filter"> -->
@@ -99,17 +111,18 @@
 
                                             </div>
                                         </div>
-                                        
+                                       
                                         <div id="bill_table" name="bill_table" class="portlet-body flip-scroll">
                                             <table class="table table-bordered table-striped table-condensed flip-content">
                                                 <thead class="flip-content">
                                                 <tr>
                                                     <th> # </th>
                                                     <th> Bill Number </th>
-                                                    <th class="numeric"> Bill Owner </th>
-                                                    <th class="numeric"> Waiter </th>
-                                                    <th class="numeric"> Table Or Room Number </th>
-                                                    <th class="numeric"> Total </th>
+                                                    <th class="numeric"> Name </th>
+                                                   
+                                                     <th class="numeric"> Table Or Room Number </th>
+                                                    <th class="numeric"> Qty </th>
+                                                     <th class="numeric"> Total </th>
                                                     <th class="numeric"> Action </th>
                                                 </tr>
                                                 </thead>
@@ -117,20 +130,21 @@
                                                 <?php
                                                // var_dump($bill_history);die;
                                                 $n = 1;
-                                                if (sizeof($bill_history) > 0) {
+                                                if (sizeof($beverage_history)>0) {
 
-                                                    foreach ($bill_history as $bill_history_result) {
+                                                    foreach ($beverage_history as $bill_history_result) {
                                                         ?>
                                                         <tr>
                                                             <td class="text-left"> <?php echo $n; ?> </td>
                                                             <td> <?php echo $bill_history_result->session_id; ?> </td>
-                                                            <td class="numeric text-right"> <?php echo  $bill_history_result->bill_owner; ?> </td>
-                                                            <td class="numeric text-right"> <?php echo $bill_history_result->waiter; ?> </td>
+                                                            <td class="numeric text-right"> <?php echo  $bill_history_result->drink_name; ?> </td>
+                                                            
                                                             <td class="numeric text-right"> <?php echo $bill_history_result->tbl_name; ?> </td>
+                                                            <td class="numeric text-right"> <?php echo $bill_history_result->qty; ?> </td>
                                                             <td class="numeric text-right"> <?php echo $bill_history_result->total; ?> </td>
 
                                                             <td class="numeric text-center">
-                                                                <a class="btn btn-sm btn-success text-center"  title="Edit" href="<?php echo base_url() ?>ShowBill?id=<?php echo $bill_history_result->session_id; ?>" > <i class="fa fa-edit" style="margin-right: 10px;"></i> </a>
+<!--                                                                <a class="btn btn-sm btn-success text-center"  title="Edit" href="<?php echo base_url() ?>ShowBill?id=<?php echo $bill_history_result->session_id; ?>" > <i class="fa fa-edit" style="margin-right: 10px;"></i> </a>-->
                                                                 <a class="btn btn-sm btn-danger text-center"  style="text-align:center;"  title="Delete" href="<?php echo base_url() ?>Bill/delete_bill?id=<?php echo $bill_history_result->session_id; ?>"  onclick="return confirm('Are You Sure?');"> <i class="fa fa-times" style="margin-right: 10px;"></i> </a>
 
                                                             </td>
@@ -256,11 +270,13 @@
            e.preventDefault();
             var st_date = $("#date_start").val();
             var ed_date = $("#date_end").val();
+            var item = $("#item").val();
     if(st_date != "" && ed_date != ""){ //alert("asdsad");
-  $.post("<?php echo base_url() ?>BillingHistory/load_data_from_date",
+  $.post("<?php echo base_url() ?>BeverageHistory/load_data_from_date",
         {
           date_start : st_date,
-          end_date : ed_date
+          end_date : ed_date,
+          item : item
         },
         function(data){
             

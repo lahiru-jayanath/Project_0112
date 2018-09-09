@@ -178,6 +178,16 @@
                                                         <i class="fa fa-history"></i> Bill History
                                                     </a>
                                                 </li>
+                                                 <li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown ">
+                                                    <a href="<?php echo base_url('BeerHistory'); ?>" class="nav-link ">
+                                                        <i class="fa fa-history"></i> Beer History
+                                                    </a>
+                                                </li>
+                                                 <li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown ">
+                                                    <a href="<?php echo base_url('BeverageHistory'); ?>" class="nav-link ">
+                                                        <i class="fa fa-history"></i> Beverage History
+                                                    </a>
+                                                </li>
                                              </ul>
                                         </li>
                                         <?php } ?>

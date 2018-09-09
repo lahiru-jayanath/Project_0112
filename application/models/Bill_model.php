@@ -230,7 +230,8 @@ class Bill_model extends CI_Model {
                                                 WHERE added_at BETWEEN $date_start AND $date_end
                                                 group by crt.session_id,usr.user_fname,usrw.user_fname");
        // return $sql_bill_history->result();
-        $asd = $sql_bill_history->result(); var_dump($asd);die;
+        return $asd = $sql_bill_history->result(); 
+        //var_dump($asd);die;
 
     }
 
@@ -301,7 +302,85 @@ class Bill_model extends CI_Model {
         $query = $this->db->query($sql);
         return $query->result();
     }
+public function get_bill_history_detail_from_date($start_date,$end_date){
 
+     //   $cu_date = date("Y-m-d 00:00:00");
+
+        $sql_bill_history = $this->db->query("SELECT crt.session_id,usr.user_fname as bill_owner,usrw.user_fname as waiter,mtbl.tbl_name,sum(crt.sub_total) as total
+                                                FROM tbl_cart crt
+                                                left join tbl_user usr on usr.user_id = crt.user_id
+                                                left join tbl_user usrw on usrw.user_id = crt.waiter_id
+                                                left join tbl_m_tables mtbl on mtbl.iid=crt.tbl_id
+                                                WHERE added_at between '".date("Y-m-d 00:00:00",strtotime($start_date))."' and '".date("Y-m-d 00:00:00",strtotime($end_date))."'
+                                                group by crt.session_id,usr.user_fname,usrw.user_fname");
+        return $sql_bill_history->result();
+    }
+    public function get_bill_history_details_from_beer($date,$item){
+        
+        $sql = $this->db->query("SELECT tbl_cart.sub_total as total,tbl_cart.qty,tbl_cart.session_id,tbl_m_tables.tbl_name,tbl_liquor.liq_name  FROM tbl_cart left join tbl_liquor  on tbl_liquor.iid = tbl_cart.item_id left join tbl_m_tables  on tbl_m_tables.iid=tbl_cart.tbl_id where tbl_cart.added_at > '".date("Y-m-d 00:00:00",strtotime($date))."' and tbl_cart.item_id in (".implode(',', $item).")  and type = 'B'  ");
+         return $sql->result();
+//        $this->db->select('tbl_cart.sub_total as total,tbl_cart.qty,tbl_cart.session_id,tbl_m_tables.tbl_name,tbl_liquor.liq_name ');
+//        $this->db->from('tbl_cart');
+//        $this->db->join('tbl_liquor ', 'tbl_liquor.iid = tbl_cart.item_id ','left');
+//        $this->db->join('tbl_m_tables','tbl_m_tables.iid=tbl_cart.tbl_id','left' );
+//        $this->db->where('tbl_cart.added_at > ',date("Y-m-d 00:00:00",strtotime($date)));
+//        $this->db->where('tbl_cart.type','B');
+//        $this->db->where_in('tbl_cart.item_id', implode(',', $item));
+//        $query = $this->db->get();
+//        return $query->result();
+        
+        
+        
+    }
+public function get_beer_bill_history_detail_from_date($date_start,$date_end,$item){
+       
+//        $this->db->select('tbl_cart.sub_total as total,tbl_cart.qty,tbl_cart.session_id,tbl_m_tables.tbl_name,tbl_liquor.liq_name ');
+//        $this->db->from('tbl_cart');
+//        $this->db->join('tbl_liquor ', 'tbl_liquor.iid = tbl_cart.item_id ','left');
+//        $this->db->join('tbl_m_tables','tbl_m_tables.iid=tbl_cart.tbl_id','left' );
+//        $this->db->where('tbl_cart.added_at >= ',date("Y-m-d 00:00:00",strtotime($date_start)));
+//        $this->db->where('tbl_cart.added_at <= ',date("Y-m-d 00:00:00",strtotime($date_end)));
+//        $this->db->where('tbl_cart.type','B');
+//        $this->db->where_in('tbl_cart.item_id',implode(',', $item));
+//        $query = $this->db->get();
+//        return $query->result();  
+    
+    $sql = $this->db->query("SELECT tbl_cart.sub_total as total,tbl_cart.qty,tbl_cart.session_id,tbl_m_tables.tbl_name,tbl_liquor.liq_name  FROM tbl_cart left join tbl_liquor  on tbl_liquor.iid = tbl_cart.item_id left join tbl_m_tables  on tbl_m_tables.iid=tbl_cart.tbl_id where tbl_cart.added_at between '".date("Y-m-d 00:00:00",strtotime($date_start))."' and '".date("Y-m-d 00:00:00",strtotime($date_end))."' and tbl_cart.item_id in (".implode(',', $item).")  and type = 'B'  ");
+        return $sql->result();   
+}
+  public function get_bill_history_details_from_beverage($date,$item){
+        
+        $sql = $this->db->query("SELECT tbl_cart.sub_total as total,tbl_cart.qty,tbl_cart.session_id,tbl_m_tables.tbl_name,tbl_drinks.drink_name  FROM tbl_cart left join tbl_drinks  on tbl_drinks.drink_id = tbl_cart.item_id left join tbl_m_tables  on tbl_m_tables.iid=tbl_cart.tbl_id where tbl_cart.added_at > '".date("Y-m-d 00:00:00",strtotime($date))."' and tbl_cart.item_id in (".implode(',', $item).")  and type = 'D'  ");
+          return $sql->result();
+//        $this->db->select('tbl_cart.sub_total as total,tbl_cart.qty,tbl_cart.session_id,tbl_m_tables.tbl_name,tbl_drinks.drink_name ');
+//        $this->db->from('tbl_cart');
+//        $this->db->join('tbl_drinks ', 'tbl_drinks.drink_id = tbl_cart.item_id ','left');
+//        $this->db->join('tbl_m_tables','tbl_m_tables.iid=tbl_cart.tbl_id','left' );
+//        $this->db->where('tbl_cart.added_at > ',date("Y-m-d 00:00:00",strtotime($date)));
+//        $this->db->where('tbl_cart.type','D');
+//        $this->db->where('tbl_cart.item_id', 'in('.implode(',', $item));
+//        $query = $this->db->get();
+//        return $query->result();
+        
+        
+        
+    }
+public function get_beverage_bill_history_detail_from_date($date_start,$date_end,$item){
+       
+//        $this->db->select('tbl_cart.sub_total as total,tbl_cart.qty,tbl_cart.session_id,tbl_m_tables.tbl_name,tbl_drinks.drink_name');
+//        $this->db->from('tbl_cart');
+//        $this->db->join('tbl_drinks', 'tbl_drinks.drink_id = tbl_cart.item_id ','left');
+//        $this->db->join('tbl_m_tables','tbl_m_tables.iid=tbl_cart.tbl_id','left' );
+//        $this->db->where('tbl_cart.added_at >= ',date("Y-m-d 00:00:00",strtotime($date_start)));
+//        $this->db->where('tbl_cart.added_at <= ',date("Y-m-d 00:00:00",strtotime($date_end)));
+//        $this->db->where('tbl_cart.type','D');
+//        $this->db->where_in('tbl_cart.item_id',implode(',', $item));
+//        $query = $this->db->get();
+//        return $query->result();  
+//    
+    $sql = $this->db->query("SELECT tbl_cart.sub_total as total,tbl_cart.qty,tbl_cart.session_id,tbl_m_tables.tbl_name,tbl_drinks.drink_name  FROM tbl_cart left join tbl_drinks  on tbl_drinks.drink_id = tbl_cart.item_id left join tbl_m_tables  on tbl_m_tables.iid=tbl_cart.tbl_id where tbl_cart.added_at between '".date("Y-m-d 00:00:00",strtotime($date_start))."' and '".date("Y-m-d 00:00:00",strtotime($date_end))."' and tbl_cart.item_id in (".implode(',', $item).")  and type = 'D'  ");
+     return $sql->result();   
+}    
 }
 
 // main class
