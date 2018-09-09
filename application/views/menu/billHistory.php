@@ -47,7 +47,7 @@
                                         <div class="m-grid-row">
                                             <div class="m-grid-col m-grid-col-top m-grid-col-left m-grid-col-md-3" style="padding: 0px 10px;">
                                                 <div class="form-group">
-                                                    <label for="single" class="control-label">To Date</label>
+                                                    <label for="single" class="control-label">From Date</label>
                                                     <div class="input-group date" data-provide="datepicker">
                                                         <input type="text" class="form-control" name="date_start" id="date_start">
                                                         <div class="input-group-addon">
@@ -58,7 +58,7 @@
                                             </div>
                                             <div class="m-grid-col m-grid-col-top m-grid-col-left m-grid-col-md-3" style="padding: 0px 10px;">
                                                 <div class="form-group">
-                                                    <label for="single" class="control-label">From Date</label>
+                                                    <label for="single" class="control-label">To Date</label>
                                                     <div class="input-group date" data-provide="datepicker">
                                                         <input type="text" class="form-control" name="date_end" id="date_end">
                                                         <div class="input-group-addon">
