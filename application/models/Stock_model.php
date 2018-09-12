@@ -447,6 +447,26 @@ class Stock_model extends CI_Model {
 
     /*     * ************************************************************************************ */
 
+    public function addStock($last_insert_id,$b_quantity,$b_buy_price,$b_sel_price,$b_discount){
+        $date = date('Y-m-d H:i:s');
+        $p_date = date('Y-m-d');
+       // $publish = 1;
+        $user_detail = ($this->session->all_userdata()['logged_user_details']);
+        $user_id = $user_detail['uid'];
+  
+        $stock_data = array(
+            'product_id' => $last_insert_id,
+            'product_type' => 'B',
+            'qty' => $b_quantity,
+            'purchase_price' => $b_buy_price,
+            'sell_price' => $b_sel_price,
+            'discount' => $b_discount,
+            'purchase_date' => $p_date,
+            'added_by' => $user_id,
+            'added_at' => $date
+        );
+       return $this->db->insert('tbl_stock', $stock_data);
+    }
 
 }
 

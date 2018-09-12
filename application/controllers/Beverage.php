@@ -13,8 +13,10 @@ class Beverage extends CI_Controller {
 
     public function index() {
         $bev_details = $this->Stock_model->get_bev_details();
+        $stock_data = array('31','32','33');
         $bev_data = array(
-            'bev_details' => $bev_details
+            'bev_details' => $bev_details,
+            'stock_data' => $stock_data
         );
         //var_dump($bev_data);die;
         $this->load->view('template/header');
@@ -95,7 +97,21 @@ class Beverage extends CI_Controller {
         }
     }
 
+    public function addStock(){
+       
+        $product_id = $this->input->post('product_id');
+        $qty = $this->input->post('qty');
+        $buy_price = $this->input->post('buy_price');
+        $selling_price = $this->input->post('selling_price');
+        $discount = $this->input->post('discount');
+
+
+
+
+        echo $this->Stock_model->addStock($product_id, $qty, $buy_price, $selling_price, $discount);
+    }
 }
+
 
 //main class
 ?>

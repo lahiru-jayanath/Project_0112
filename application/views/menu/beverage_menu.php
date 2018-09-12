@@ -144,6 +144,9 @@
                                                                 <td class="numeric text-center">
                                                                     <a class="btn btn-sm btn-danger text-center"  style="text-align:center;"  title="Delete" href="<?php echo base_url() ?>Beverage/delete_bev?id=<?php echo $bev_result->drink_id; ?>"  onclick="return confirm('Are You Sure?');"> <i class="fa fa-times" style="margin-right: 10px;"></i> </a>
                                                                     <button class="btn btn-sm btn-success text-center" id="<?php echo $bev_result->drink_id; ?>" onclick="editdata(this);"><i class="fa fa-edit" style="margin-right: 10px;"></i></button>
+                                                                  <?php if (in_array($bev_result->drink_id , $stock_data)) {?>
+                                                                    <button class="btn btn-sm btn-primary text-center" data-toggle="modal" data-target="#myModal" onclick="addstock(<?php echo $bev_result->drink_id; ?>,'<?php echo $bev_result->drink_name; ?>' )"><i class="fa fa-edit" style="margin-right: 10px;"></i></button>
+                                                                  <?php }?>
                                                                 </td>
                                                             </tr>
                                                             <?php
@@ -204,7 +207,7 @@
                             <i class="fa fa-coffee"></i>
                             <input type="text" class="form-control" name="bev_name" id="bev_name" placeholder="Product Name" pattern="[A-Z a-z]{1,32}" required>
                         </div>
-                        asd
+                      
                         
                         <div class="input-icon" style="margin-bottom: 5px;">
                             <i class="fa fa-credit-card"></i>
@@ -246,6 +249,51 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<!-- Lahiru  -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add Stock</h4>
+        </div>
+            <form>
+        <div class="modal-body">
+          
+            <div class="input-icon" style="margin-bottom: 5px;">
+                            <i class="fa fa-coffee"></i>
+                            <input type="text" class="form-control" name="stock_bev_name" id="stock_bev_name" placeholder="Product Name" pattern="[A-Z a-z]{1,32}" required readonly>
+                            <input type="hidden" class="form-control" name="stock_bev_id" id="stock_bev_id" placeholder="Product Name" pattern="[A-Z a-z]{1,32}" required >
+                       
+            </div>
+                      
+         <div class="input-icon" style="margin-bottom: 5px;">
+                            <i class="fa fa-credit-card"></i>
+                            <input type="number" class="form-control" name="stock_b_quantity" id="stock_b_quantity" placeholder="Quanlity" required>
+                        </div>
+             <div class="input-icon" style="margin-bottom: 5px;">
+                            <i class="fa fa-money"></i>
+                            <input type="number" class="form-control" name="stock_b_buy_price" id="stock_b_buy_price" placeholder="Buying Price" required>
+                        </div>
+                        <div class="input-icon" style="margin-bottom: 5px;">
+                            <i class="fa fa-dollar"></i>
+                            <input type="number" class="form-control" name="stock_ssb_sel_price" id="stock_ssb_sel_price" placeholder="Seling Price"  required>
+                        </div>
+            <div class="input-icon" style="margin-bottom: 5px;">
+                            <i class="fa fa-dollar"></i>
+                            <input type="number" class="form-control" name="stock_discount" id="stock_discount" placeholder="Discount"  required>
+                        </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-success" onclick="saveStock()" >Save</button>
+        </div>
+         </form>
+      </div>
+      
+    </div>    
+    
+</div>
 
 <script>
 
@@ -348,5 +396,25 @@
             $('#add_new_beverage').modal('show');
         }
     }
+    
+   function addstock(id,product_name){
+       
+       $("#stock_bev_name").val(product_name);
+        $("#stock_bev_id").val(id);
+      // alert(product_name);
+   }
+   
+  function saveStock(){
+     var product_id = $("#stock_bev_id").val();
+     var qty = $("#stock_b_quantity").val();
+     var buy_price = $("#stock_b_buy_price").val();
+     var discount  = $("#stock_discount").val();
+     var selling_price  = $("#stock_ssb_sel_price").val();
+    	//alert(product_id);
+    
+     $.post("<?php echo base_url();?>/Beverage/addStock", {product_id:product_id,qty:qty,buy_price:buy_price,selling_price:selling_price,discount:discount}, function(data){
+     //alert(data);
+    });
+  }
 </script>
 
