@@ -145,7 +145,7 @@
                                                                     <a class="btn btn-sm btn-danger text-center"  style="text-align:center;"  title="Delete" href="<?php echo base_url() ?>Beverage/delete_bev?id=<?php echo $bev_result->drink_id; ?>"  onclick="return confirm('Are You Sure?');"> <i class="fa fa-times" style="margin-right: 10px;"></i> </a>
                                                                     <button class="btn btn-sm btn-success text-center" id="<?php echo $bev_result->drink_id; ?>" onclick="editdata(this);"><i class="fa fa-edit" style="margin-right: 10px;"></i></button>
                                                                   <?php if (in_array($bev_result->drink_id , $stock_data)) {?>
-                                                                    <button class="btn btn-sm btn-primary text-center" data-toggle="modal" data-target="#myModal" onclick="addstock(<?php echo $bev_result->drink_id; ?>,'<?php echo $bev_result->drink_name; ?>' )"><i class="fa fa-edit" style="margin-right: 10px;"></i></button>
+                                                                    <button class="btn btn-sm btn-primary text-center" data-toggle="modal" data-target="#myModal" onclick="addstock(<?php echo $bev_result->drink_id; ?>,'<?php echo $bev_result->drink_name; ?>' )"><i class="fa fa-plus" style="margin-right: 10px;"></i></button>
                                                                   <?php }?>
                                                                 </td>
                                                             </tr>
