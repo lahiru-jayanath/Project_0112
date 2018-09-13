@@ -108,7 +108,11 @@ class Beverage extends CI_Controller {
 
 
 
-        echo $this->Stock_model->addStock($product_id, $qty, $buy_price, $selling_price, $discount);
+        $html = $this->Stock_model->addStock($product_id, $qty, $buy_price, $selling_price, $discount);
+        
+        $html .= $this->Stock_model->updateDrinkstable($product_id,$qty,$buy_price,$selling_price,$discount);
+    
+        echo $html;
     }
 }
 
