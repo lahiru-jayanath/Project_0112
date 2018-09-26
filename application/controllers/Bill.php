@@ -254,6 +254,7 @@ class Bill extends CI_Controller {
     }
 
     public function get_all_bill_items($session_id) {
+        
         $result_item_data = $this->Bill_model->get_all_cart_items($session_id);
 
         $data_array = array();

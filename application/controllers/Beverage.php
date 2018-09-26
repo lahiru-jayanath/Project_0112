@@ -105,13 +105,14 @@ class Beverage extends CI_Controller {
         $selling_price = $this->input->post('selling_price');
         $discount = $this->input->post('discount');
 
-
-
+       //$sum_current_qty = 0;
+       $product_details = $this->Stock_model->get_bev_by_id_current($product_id);
+       $sum_current_qty = $qty + $product_details->drink_current_stock;
 
         $html = $this->Stock_model->addStock($product_id, $qty, $buy_price, $selling_price, $discount);
         
-        $html .= $this->Stock_model->updateDrinkstable($product_id,$qty,$buy_price,$selling_price,$discount);
-    
+        $html .= $this->Stock_model->updateDrinkstable($product_id,$qty,$buy_price,$selling_price,$discount,$sum_current_qty);
+                                                        
         echo $html;
     }
 }

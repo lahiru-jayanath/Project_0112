@@ -597,11 +597,11 @@
                                             <div class="row">
                                                 <div class="col-sm-6 col-md-3">
                                                     <a href="javascript:;" class="thumbnail">
-                                                        <img src="assets/global/img/portfolio/400x300/food.png" alt="100%x180" style="height: 180px; width: 100%; display: block;"> </a>
+                                                        <img src="<?php echo base_url();?>assets/global/img/portfolio/400x300/food.png" alt="100%x180" style="height: 180px; width: 100%; display: block;"> </a>
                                                 </div>
                                                 <div class="col-sm-6 col-md-3">
                                                     <a href="javascript:;" class="thumbnail">
-                                                        <img src="assets/global/img/portfolio/400x300/liquor.png" alt="100%x180" style="height: 180px; width: 100%; display: block;"> </a>
+                                                        <img src="<?php echo base_url();?>assets/global/img/portfolio/400x300/liquor.png" alt="100%x180" style="height: 180px; width: 100%; display: block;"> </a>
                                                 </div>
                                             </div>
                                         </div>

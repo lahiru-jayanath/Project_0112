@@ -468,7 +468,7 @@ class Stock_model extends CI_Model {
        return $this->db->insert('tbl_stock', $stock_data);
     }
 
-    public function updateDrinkstable($drink_id,$b_quantity,$b_buy_price,$b_sel_price,$b_discount){
+    public function updateDrinkstable($drink_id,$b_quantity,$b_buy_price,$b_sel_price,$b_discount,$drink_current_stock){
        $date = date('Y-m-d H:i:s');
         $p_date = date('Y-m-d');
     
@@ -478,11 +478,16 @@ class Stock_model extends CI_Model {
             'drink_salling_price' => $b_buy_price,
             'drink_price' => $b_sel_price,
             'drink_discount' => $b_discount,
-            'drink_purches_date' => $p_date,            
+            'drink_purches_date' => $p_date,
+            'drink_current_stock' => $drink_current_stock,
             'date_created' => $date
         );
         $this->db->where('drink_id',$drink_id); 
         return $this->db->update('tbl_drinks',$stock_data);
+    }
+     public function get_bev_by_id_current($id) {
+        $sql_food = $this->db->query("SELECT * FROM tbl_drinks WHERE drink_id='".$id."'");
+        return $sql_food->row();
     }
 }
 
